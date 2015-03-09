@@ -1,4 +1,11 @@
 <?php
+function create_directory($input)
+{
+    if (!is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $input['droot'])) {
+        mkdir($_SERVER['DOCUMENT_ROOT'] . '/' . $input['droot']);        
+    }
+}
+
 function update_apache($input)
 {    
     // APACHE vhosts.conf    
@@ -55,6 +62,7 @@ if (isset($_POST['btn-submit'])) {
             exit;
         }
         
+        create_directory($_POST);
         update_apache($_POST);
         update_windows($_POST);        
         
